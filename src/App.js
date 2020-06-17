@@ -23,7 +23,7 @@ function App() {
   return (
     <Canvas
       style={{ background: "#171717" }}
-      camera={{fov: 100, position: [0, 5, 0]}}
+      camera={{fov: 100, position: [0, 5, 20]}}
       shadowMap
       colorManagement
     >
