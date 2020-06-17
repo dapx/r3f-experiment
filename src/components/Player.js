@@ -5,7 +5,7 @@ const Player = forwardRef((props, fwRef) => {
   const [ref, api] = useBox(() => ({ mass: 1, args: [2,2,2], ...props }), fwRef)
   useEffect(() => {
     ref.current.api = api
-  }, [ref])
+  }, [ref, api])
   return (
     <mesh
       ref={ref}
