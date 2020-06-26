@@ -3,12 +3,14 @@ import { useThree, extend, useFrame } from 'react-three-fiber';
 import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls'
 import useKeyboardMovement from '../hooks/useKeyboardMovement'
 import usePointerLock from '../hooks/usePointerLock'
+import { usePlayer } from '../hooks/usePlayer'
 
 extend({ PointerLockControls })
-const Controls = ({ playerRef, ...props}) => {
+const Controls = ({ ...props}) => {
   const { gl, camera } = useThree()
   const ref = useRef()
   const keyboard = useKeyboardMovement()
+  const api = usePlayer()
   usePointerLock({
     target: window,
     ref
@@ -33,13 +35,13 @@ const Controls = ({ playerRef, ...props}) => {
     if (keyboard.moveBackward) ref.current.moveForward(-movingSpeed)
     if (keyboard.moveRight) ref.current.moveRight(movingSpeed)
     if (keyboard.moveLeft) ref.current.moveRight(-movingSpeed)
-    if (playerRef.current && playerRef.current.api) {
-      playerRef.current.api.position.set(
+    if (api.current) {
+      api.current.position.set(
         cameraRef.position.x,
         cameraRef.position.y,
         cameraRef.position.z,
         )
-      playerRef.current.api.rotation.set(
+      api.current.rotation.set(
         cameraRef.rotation.x,
         cameraRef.rotation.y,
         cameraRef.rotation.z,
